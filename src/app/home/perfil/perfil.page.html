@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        <ion-icon name="log-out" slot="start"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div id="header">
+    <ion-avatar>
+      <img [src]="user.img">
+    </ion-avatar>
+    <ion-text>
+      <h2>{{user.name}}</h2>
+    </ion-text>
+  </div>
+  <ion-item>
+    <ion-text>
+      <h3>Direccion de correo</h3>
+      {{user.mail}}
+    </ion-text>
+  </ion-item>
+  <div *ngFor = "let materia of allmaterias">
+    <ion-item (click) = "openModal(materia)" *ngIf = "materiaMismoId(materia.id, mismaterias)">
+      <ion-thumbnail>
+        <img [src]="materia.img" />
+      </ion-thumbnail>
+      <ion-label>{{materia.nombre}}</ion-label>
+    </ion-item>
+  </div>
+</ion-content>

@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position= 'floating'>Correo Electronico</ion-label>
+    <ion-input type= 'text' [(ngModel)]= 'email' name= 'email' placeholder= 'ejemplo@email.com'></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position= 'floating'>Nombre y apellido</ion-label>
+    <ion-input type= 'text' [(ngModel)]= 'name' name= 'name' placeholder= 'Larry Capija'></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position= 'floating'>Contraseña</ion-label>
+    <ion-input type= 'password' [(ngModel)]= 'password' name= 'password' placeholder= 'Contraseña'></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position= 'floating'>Confirmar contraseña</ion-label>
+    <ion-input type= 'password' [(ngModel)]= 'password2' name= 'password2' placeholder= 'Contraseña'></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Carrera</ion-label>
+    <ion-select interface="popover" type= 'text' [(ngModel)]= 'carrera' name= 'carrera'>
+      <ion-select-option value="Sistemas">Sistemas</ion-select-option>
+      <ion-select-option value="Quimica">Quimica</ion-select-option>
+      <ion-select-option value="Mecanica">Mecanica</ion-select-option>
+      <ion-select-option value="Electrica">Electrica</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Fecha de nacimiento</ion-label>
+    <ion-datetime value="2000-01-01" placeholder="Select Date"  [(ngModel)]= 'nacimiento' name= 'nacimiento'></ion-datetime>
+  </ion-item>
+  <ion-button (click)= 'singUpUser(email, name, password, password2, carrera, nacimiento)' expand= 'full'>Registrarse</ion-button>
+</ion-content>

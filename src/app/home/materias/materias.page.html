@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="logOut()">
+        <ion-icon name="log-out" slot="start"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Materias</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngFor = "let materia of allmaterias">
+    <ion-item *ngIf = "materiaMismoId(materia.id, mismaterias)" > 
+      <ion-card (click)= "openModal(materia)">
+        <ion-img [src]="materia.img"></ion-img>
+        <ion-card-header>
+          <ion-card-subtitle>{{materia.horarios}}</ion-card-subtitle>
+          <ion-card-title>{{materia.nombre}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          Profesor: 
+          <ion-chip>
+            <ion-avatar>
+              <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg">
+            </ion-avatar>
+            <ion-label>{{materia.profesor}}</ion-label>
+          </ion-chip>  
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </div>
+  <div style="margin: 10px;">
+    <ion-fab-button (click)='matricularse()' routeranimation color="danger" style = "margin: auto;">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </div>
+</ion-content>

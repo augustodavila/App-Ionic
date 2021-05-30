@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" (click)="closeModal()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-title>{{materia.nombre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-img [src]="materia.img"></ion-img>
+  <ion-item>
+    Horiario: {{materia.horarios}}
+  </ion-item>
+  <div *ngIf = "examenes.length > 0; else noexamen">
+    <ion-item *ngFor = "let examen of examenes">
+      <ion-label>{{examen.nombre}} {{examen.fecha}}</ion-label>
+    </ion-item>
+  </div>
+  <ng-template #noexamen>
+    No hay ningun examen por el momento
+  </ng-template>
+  <ion-button (click)="prueba()" expand="block" fill="clear" shape="round">
+    Click me
+  </ion-button>
+</ion-content>
+
+
+<!--<div *ngFor = "">
+  <ion-item *ngIf = "">
+    <ion-label>{{materia.nombre}}</ion-label>
+  </ion-item>
+</div>-->

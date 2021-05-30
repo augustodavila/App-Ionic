@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/all-materias"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear materia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position= 'floating'>Nombre de la materia</ion-label>
+    <ion-input type= 'text' [(ngModel)]= 'name' name= 'name' placeholder= 'nombre materia'></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position= 'floating'>URL imagen </ion-label>
+    <ion-input type= 'text' [(ngModel)]= 'img' name= 'img' placeholder= 'www.url.com'></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Dia</ion-label>
+     <ion-select interface="popover" type= 'text' [(ngModel)]= 'dia' name= 'dia'>
+       <ion-select-option value="Lunes">Lunes</ion-select-option>
+      <ion-select-option value="Martes">Martes</ion-select-option>
+      <ion-select-option value="Miercoles">Miercoles</ion-select-option>
+      <ion-select-option value="Jueves">Jueves</ion-select-option>
+      <ion-select-option value="Viernes">Viernes</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>Hora</ion-label>
+      <ion-datetime display-format="H:mm" picker-format="H:mm" value="07:43" [(ngModel)]= 'hora1' name= 'hora1'></ion-datetime>
+      ⠀-
+      <ion-datetime display-format="H:mm" picker-format="H:mm" value="07:43" [(ngModel)]= 'hora2' name= 'hora2'></ion-datetime>
+  </ion-item>
+  <ion-button (click)= 'crearMateria(name, img, dia, hora1, hora2, user.name)' expand= 'full'>Crear materia</ion-button>
+</ion-content>
