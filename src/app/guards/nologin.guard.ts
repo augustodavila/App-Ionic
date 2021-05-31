@@ -4,13 +4,14 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { isNullOrUndefined } from 'util';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthService } from '../servicios/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NologinGuard implements CanActivate {
 
-  constructor(private AFauth : AngularFireAuth, private router: Router){}
+  constructor(private AFauth : AngularFireAuth, private router: Router, public aService : AuthService){}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -21,6 +22,8 @@ export class NologinGuard implements CanActivate {
           return true
         }else{
           this.router.navigate(['/home/materias'])
+          this.aService.getUserData(auth.uid)
+          console.log(auth.uid)
           return false
         }
       }))

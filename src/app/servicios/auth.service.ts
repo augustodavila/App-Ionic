@@ -12,8 +12,7 @@ export class AuthService {
 
   public usuario;
 
-  constructor(private AFauth : AngularFireAuth, private db : AngularFirestore, public navController: NavController) { 
-    this.getUserData();
+  constructor(private AFauth : AngularFireAuth, private db : AngularFirestore, public navController: NavController) {   
   }
 
   login(email:string, password:string){
@@ -36,19 +35,14 @@ export class AuthService {
     return this.AFauth.signOut();
   }
 
-  getCurrentUser(){
-    return this.AFauth.currentUser ? this.AFauth.currentUser : null ;
-  }
-
-  getUserData(){
-    var uid
-    this.getCurrentUser()?.then(data => {
-       uid = data.uid
-       this.db.collection('users').doc(uid).get().subscribe(data => {
-        this.usuario = data.data();
-      })
-    })
-  }
+  getUserData(uid){
+       if (!this.usuario){
+        this.db.collection('users').doc(uid).get().subscribe(data => {
+          this.usuario = data.data();
+        })
+       }
+    }
+  
 
 }
 

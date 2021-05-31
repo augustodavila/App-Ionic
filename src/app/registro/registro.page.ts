@@ -36,7 +36,6 @@ export class RegistroPage implements OnInit {
               mail : email,
             })
             this.router.navigate(['/home/materias']);
-            this.authService.getUserData();
         })
        async error => {
           const alert = await this.alertCtrl.create({

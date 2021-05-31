@@ -8,6 +8,19 @@ import { MateriasService, materia } from 'src/app/servicios/materias.service';
 import { ModalController } from "@ionic/angular";
 import { MismateriasComponent } from "../../componentes/mismaterias/mismaterias.component";
 
+function delay(n){
+  return new Promise(function(resolve){
+      setTimeout(resolve,n*1000);
+  });
+}
+
+async function myAsyncFunction(){
+  await delay(5);
+  console.log(this.authService.usuario)
+    this.getMateriasUser().subscribe( materias => {
+      this.mismaterias = materias
+    })
+}
 
 @Component({
   selector: 'app-materias',
@@ -15,6 +28,8 @@ import { MismateriasComponent } from "../../componentes/mismaterias/mismaterias.
   styleUrls: ['./materias.page.scss'],
 })
 export class MateriasPage implements OnInit {
+
+  
 
   constructor(private authService: AuthService, public router: Router, private menu: MenuController, public materiasservice : MateriasService,
      public db : AngularFirestore, public modal : ModalController) {}
@@ -26,10 +41,10 @@ export class MateriasPage implements OnInit {
     this.materiasservice.getMaterias().subscribe( materias => {
       this.allmaterias = materias
     })
-    this.getMateriasUser().subscribe( materias => {
-      this.mismaterias = materias
-    })
+    myAsyncFunction()
   }
+  
+  
 
   getMateriasUser(){
     return this.db.collection('users').doc(this.authService.usuario.uid).collection("materias").snapshotChanges().pipe(map(sala =>{
