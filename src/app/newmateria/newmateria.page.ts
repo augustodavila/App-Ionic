@@ -20,11 +20,13 @@ export class NewmateriaPage implements OnInit {
   constructor( public authService : AuthService, public db : AngularFirestore, public router : Router) { }
 
   ngOnInit() {
+    this.authService.getUsuario().subscribe(usuario=>{
+      if (usuario){
+        this.user = usuario
+      }
+    })
   }
 
-  ionViewWillEnter(){
-    this.user = this.authService.usuario
-  }
   crearMateria(name, img, dia, hora1, hora2, profesor){
     hora1 = hora1.slice(11,16)
     hora2 = hora2.slice(11,16)

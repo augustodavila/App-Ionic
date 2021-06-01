@@ -22,7 +22,6 @@ export class NologinGuard implements CanActivate {
           return true
         }else{
           this.router.navigate(['/home/materias'])
-          this.aService.getUserData(auth.uid)
           console.log(auth.uid)
           return false
         }

@@ -18,20 +18,27 @@ export class PerfilPage implements OnInit {
   public allmaterias : any = [];
   public mismaterias : any = [];
 
+
   constructor(public modal : ModalController, private authService: AuthService, public router: Router, public materiasservice : MateriasService, public db: AngularFirestore) {
   }
 
   ngOnInit(){
-    this.materiasservice.getMaterias().subscribe( materias => {
-      this.allmaterias = materias
+    this.authService.getUsuario().subscribe(usuario=>{
+      if (usuario){
+        this.user = usuario
+        this.materiasservice.getMaterias().subscribe( materias => {
+          this.allmaterias = materias
+        })
+        this.getMisMaterias().subscribe( materias => {
+          this.mismaterias = materias
+        })
+      }
     })
-    this.getMisMaterias().subscribe( materias => {
-      this.mismaterias = materias
-    })
+    
   }
 
   getMisMaterias(){
-    return this.db.collection('users').doc(this.authService.usuario.uid).collection("mismaterias").snapshotChanges().pipe(map(sala =>{
+    return this.db.collection('users').doc(this.user.uid).collection("mismaterias").snapshotChanges().pipe(map(sala =>{
       return sala.map(a =>{
         const data = a.payload.doc.id;
         return data;
@@ -41,7 +48,6 @@ export class PerfilPage implements OnInit {
 
 
   ionViewWillEnter(){
-    this.user = this.authService.usuario
     console.log(this.user)
   }
 

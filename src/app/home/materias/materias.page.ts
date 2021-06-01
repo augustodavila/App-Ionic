@@ -8,19 +8,6 @@ import { MateriasService, materia } from 'src/app/servicios/materias.service';
 import { ModalController } from "@ionic/angular";
 import { MismateriasComponent } from "../../componentes/mismaterias/mismaterias.component";
 
-function delay(n){
-  return new Promise(function(resolve){
-      setTimeout(resolve,n*1000);
-  });
-}
-
-async function myAsyncFunction(){
-  await delay(5);
-  console.log(this.authService.usuario)
-    this.getMateriasUser().subscribe( materias => {
-      this.mismaterias = materias
-    })
-}
 
 @Component({
   selector: 'app-materias',
@@ -29,25 +16,34 @@ async function myAsyncFunction(){
 })
 export class MateriasPage implements OnInit {
 
-  
+  public usuario;
 
   constructor(private authService: AuthService, public router: Router, private menu: MenuController, public materiasservice : MateriasService,
      public db : AngularFirestore, public modal : ModalController) {}
 
   public allmaterias : any = [];
   public mismaterias : any = [];
+  
 
   ngOnInit(){
-    this.materiasservice.getMaterias().subscribe( materias => {
-      this.allmaterias = materias
+    this.authService.getUsuario().subscribe(usuario=>{
+      if (usuario){
+        this.usuario = usuario
+        console.log(this.usuario,'hollllllaaaaaa')
+        this.materiasservice.getMaterias().subscribe( materias => {
+          this.allmaterias = materias
+        })
+        this.getMateriasUser().subscribe( materias => {
+          this.mismaterias = materias
+        })
+      }
     })
-    myAsyncFunction()
   }
   
   
 
   getMateriasUser(){
-    return this.db.collection('users').doc(this.authService.usuario.uid).collection("materias").snapshotChanges().pipe(map(sala =>{
+    return this.db.collection('users').doc(this.usuario.uid).collection("materias").snapshotChanges().pipe(map(sala =>{
       return sala.map(a =>{
         const data = a.payload.doc.id;
         return data;

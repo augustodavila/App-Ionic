@@ -35,7 +35,8 @@ const routes: Routes = [
   },
   {
     path: 'newmateria',
-    loadChildren: () => import('./newmateria/newmateria.module').then( m => m.NewmateriaPageModule)
+    loadChildren: () => import('./newmateria/newmateria.module').then( m => m.NewmateriaPageModule),
+    canActivate : [AuthGuard]
   },
 ];
 

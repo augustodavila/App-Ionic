@@ -15,18 +15,24 @@ import { AuthService } from "../../servicios/auth.service";
 export class MatricularComponent implements OnInit {
   
   public materia : any;
+  public usuario;
   
   constructor( public alertController: AlertController ,private navparams : NavParams, private modal : ModalController, public AFauth: AngularFireAuth, public aService : AuthService, public db : AngularFirestore, private router : Router) { }
 
   ngOnInit() {
     this.materia = this.navparams.get('materia');
+    this.aService.getUsuario().subscribe(usuario=>{
+      if (usuario){
+        this.usuario = usuario
+      }
+    })
   }
 
   closeModal(){
     this.modal.dismiss()
   }
   matricular(){
-    this.db.collection('users').doc(this.aService.usuario.uid).collection("materias").doc(this.materia.id).set({
+    this.db.collection('users').doc(this.usuario.uid).collection("materias").doc(this.materia.id).set({
       nombre : this.materia.nombre,
       id : this.materia.id
     });

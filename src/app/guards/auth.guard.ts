@@ -23,7 +23,6 @@ export class AuthGuard implements CanActivate {
           return false
         }else{
           this.aService.getUserData(auth.uid)
-          console.log(auth.uid)
           return true
         }
       }))

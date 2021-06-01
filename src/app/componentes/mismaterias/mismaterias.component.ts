@@ -13,12 +13,18 @@ import { AuthService } from 'src/app/servicios/auth.service';
 export class MismateriasComponent implements OnInit {
 
   public materia : any;
+  public usuario;
 
   constructor( public alertController: AlertController ,private navparams : NavParams, private modal : ModalController, public AFauth: AngularFireAuth,
      public aService : AuthService, public db : AngularFirestore, private router : Router) { }
 
   ngOnInit() {
     this.materia = this.navparams.get('materia');
+    this.aService.getUsuario().subscribe(usuario=>{
+      if (usuario){
+        this.usuario = usuario
+      }
+    })
   }
 
   closeModal(){
@@ -26,7 +32,7 @@ export class MismateriasComponent implements OnInit {
   }
 
   eliminarMateria(){
-    this.db.collection('users').doc(this.aService.usuario.uid).collection("materias").doc(this.materia.id).delete();
+    this.db.collection('users').doc(this.usuario.uid).collection("materias").doc(this.materia.id).delete();
     this.router.navigate(['/home/materias']);
     this.closeModal()
   }
