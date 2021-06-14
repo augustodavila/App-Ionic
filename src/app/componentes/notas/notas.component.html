@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" (click)="closeModal()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-title>{{examen.nombre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngIf = "alumnos.length > 0; else noalumnos">
+    <ion-item *ngFor = "let alumno of alumnos; let x=index ">
+      <ion-label>{{alumno.nombre}}: </ion-label>
+      <ion-input type= 'number' [(ngModel)]= 'nota[x]' name= 'nota[x]' max = "10" min="0"></ion-input>
+      </ion-item>
+  </div>
+  <ng-template #noalumnos>
+    No hay ningun alumno por el momento
+  </ng-template>
+  <ion-button (click)="setNotas()" expand="block" fill="clear" shape="round">
+    Click me
+  </ion-button>
+  <ion-button (click)="prueba()" expand="block" fill="clear" shape="round">
+    Prueba
+  </ion-button>
+</ion-content>

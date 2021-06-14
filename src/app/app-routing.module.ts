@@ -38,6 +38,10 @@ const routes: Routes = [
     loadChildren: () => import('./newmateria/newmateria.module').then( m => m.NewmateriaPageModule),
     canActivate : [AuthGuard]
   },
+  {
+    path: 'mimateriainfo',
+    loadChildren: () => import('./mimateriainfo/mimateriainfo.module').then( m => m.MimateriainfoPageModule)
+  },
 ];
 
 @NgModule({

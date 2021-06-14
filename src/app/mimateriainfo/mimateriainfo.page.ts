@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
-import { NotasComponent } from '../notas/notas.component';
-
+import { NotasComponent } from '../componentes/notas/notas.component';
 
 interface examen{
   nombre : string
@@ -12,32 +12,27 @@ interface examen{
 }
 
 @Component({
-  selector: 'app-materiasperfil',
-  templateUrl: './materiasperfil.component.html',
-  styleUrls: ['./materiasperfil.component.scss'],
+  selector: 'app-mimateriainfo',
+  templateUrl: './mimateriainfo.page.html',
+  styleUrls: ['./mimateriainfo.page.scss'],
 })
-export class MateriasperfilComponent implements OnInit {
+export class MimateriainfoPage implements OnInit {
 
-  public materia : any;
+  public materia: any;
   public examenes : any = [];
 
-  constructor(public db: AngularFirestore, private navparams : NavParams, private modal : ModalController) { }
+  constructor(private router : Router, private route : ActivatedRoute, public modal : ModalController, public db : AngularFirestore) {
+   if(this.router.getCurrentNavigation().extras.state) {
+     this.materia = this.router.getCurrentNavigation().extras.state.materia
+   }
+  }
 
   ngOnInit() {
-    this.materia = this.navparams.get('materia');
     this.getExamenes().subscribe( examen => {
       this.examenes = examen
-    })
+    })      
   }
 
-  prueba(){
-    console.log(this.examenes)
-  }
-
-  closeModal(){
-    this.modal.dismiss()
-  }
-  
   getExamenes(){
     return this.db.collection('materias').doc(this.materia.id).collection("examenes").snapshotChanges().pipe(map(sala =>{
       return sala.map(a =>{
@@ -46,13 +41,6 @@ export class MateriasperfilComponent implements OnInit {
         return data;
       })
     }))
-  }
-
-  crearExamen(name, fecha){
-    this.db.collection("materias").doc(this.materia.id).collection("examenes").doc().set({
-      nombre: name,
-      fecha: fecha,
-    })
   }
 
   openModal(examen){
@@ -64,4 +52,9 @@ export class MateriasperfilComponent implements OnInit {
       }
     }).then((modal) => modal.present())
   }
+
+  prueba(){
+    console.log(this.examenes)
+  }
+
 }

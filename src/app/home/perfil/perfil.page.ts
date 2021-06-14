@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { NavigationExtras, Router } from '@angular/router';
+import { IonNav, ModalController} from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { MateriasperfilComponent } from 'src/app/componentes/materiasperfil/materiasperfil.component';
+import { MimateriainfoPage } from 'src/app/mimateriainfo/mimateriainfo.page';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { MateriasService, materia } from 'src/app/servicios/materias.service';
 
@@ -74,5 +75,14 @@ export class PerfilPage implements OnInit {
         materia : materia
       }
     }).then((modal) => modal.present())
+  }
+
+  openMateriapage(materia){
+    let navigationExtas : NavigationExtras ={
+      state: {
+        materia : materia
+      }
+    }
+    this.router.navigate(['mimateriainfo'], navigationExtas)
   }
 }

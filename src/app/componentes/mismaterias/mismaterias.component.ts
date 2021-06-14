@@ -33,6 +33,7 @@ export class MismateriasComponent implements OnInit {
 
   eliminarMateria(){
     this.db.collection('users').doc(this.usuario.uid).collection("materias").doc(this.materia.id).delete();
+    this.db.collection('materias').doc(this.materia.id).collection('alumnos').doc(this.usuario.uid).delete();
     this.router.navigate(['/home/materias']);
     this.closeModal()
   }

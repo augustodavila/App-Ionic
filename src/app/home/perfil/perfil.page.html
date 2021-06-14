@@ -25,7 +25,7 @@
     </ion-text>
   </ion-item>
   <div *ngFor = "let materia of allmaterias">
-    <ion-item (click) = "openModal(materia)" *ngIf = "materiaMismoId(materia.id, mismaterias)">
+    <ion-item (click) = "openMateriapage(materia)" *ngIf = "materiaMismoId(materia.id, mismaterias)">
       <ion-thumbnail>
         <img [src]="materia.img" />
       </ion-thumbnail>

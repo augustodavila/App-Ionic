@@ -36,6 +36,10 @@ export class MatricularComponent implements OnInit {
       nombre : this.materia.nombre,
       id : this.materia.id
     });
+    this.db.collection('materias').doc(this.materia.id).collection('alumnos').doc(this.usuario.uid).set({
+      nombre : this.usuario.name,
+      uid : this.usuario.uid
+    })
     this.router.navigate(['/home/materias']);
     this.closeModal()
   }
