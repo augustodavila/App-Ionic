@@ -13,10 +13,11 @@ import { MismateriasComponent } from './componentes/mismaterias/mismaterias.comp
 import { MateriasperfilComponent } from './componentes/materiasperfil/materiasperfil.component';
 import { NotasComponent } from './componentes/notas/notas.component';
 import { FormsModule } from '@angular/forms';
+import { NewexamenComponent } from './componentes/newexamen/newexamen.component';
 
 @NgModule({
-  declarations: [AppComponent, MatricularComponent, MismateriasComponent,MateriasperfilComponent, NotasComponent],
-  entryComponents: [MatricularComponent, MismateriasComponent, MateriasperfilComponent, NotasComponent],
+  declarations: [AppComponent, MatricularComponent, MismateriasComponent,MateriasperfilComponent, NotasComponent, NewexamenComponent],
+  entryComponents: [MatricularComponent, MismateriasComponent, MateriasperfilComponent, NotasComponent, NewexamenComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(firebaseConfig), AngularFireAuthModule, AngularFirestoreModule, FormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

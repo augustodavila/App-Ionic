@@ -21,5 +21,16 @@
     <ion-item>
       Horiario: {{materia.horarios}}
     </ion-item>
+    <div *ngIf = "examenes.length > 0; else noexamen">
+      <ion-item *ngFor = "let examen of examenes; let i = index">
+        <ion-label>{{examen.nombre}}ㅤ  Fecha: {{examen.fecha}}ㅤㅤㅤㅤNota: {{notas[i]}}</ion-label>
+      </ion-item>
+    </div>
+    <ng-template #noexamen>
+      No hay ningun examen por el momento
+    </ng-template>
+    <ion-button (click)="prueba() " expand="block" fill="clear" shape="round">
+      Click me
+    </ion-button>
   </ion-content>
 </ion-app>

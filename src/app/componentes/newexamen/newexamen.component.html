@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start" fill="clear" (click)="closeModal()">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+    <ion-title>{{materia.nombre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-label position= 'floating'>Nombre del Examen</ion-label>
+    <ion-input type= 'text' [(ngModel)]= 'name' name= 'name' placeholder= 'nombre materia'></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>MM DD YY</ion-label>
+    <ion-datetime displayFormat="DD MMM YY" placeholder="Select Date" [(ngModel)]= 'fecha' name= 'fecha'></ion-datetime>
+  </ion-item>
+  <ion-button (click)= 'crearExamen(name, fecha)' expand= 'full'>Crear materia</ion-button>
+</ion-content>

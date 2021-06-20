@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { map } from 'rxjs/operators';
+import { NewexamenComponent } from '../componentes/newexamen/newexamen.component';
 import { NotasComponent } from '../componentes/notas/notas.component';
 
 interface examen{
@@ -48,6 +49,15 @@ export class MimateriainfoPage implements OnInit {
       component: NotasComponent,
       componentProps: {
         examen : examen,
+        materia : this.materia
+      }
+    }).then((modal) => modal.present())
+  }
+
+  openModalNewExamen(){
+    this.modal.create({
+      component: NewexamenComponent,
+      componentProps: {
         materia : this.materia
       }
     }).then((modal) => modal.present())
